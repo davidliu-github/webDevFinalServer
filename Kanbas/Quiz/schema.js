@@ -22,6 +22,7 @@ const quizSchema = new mongoose.Schema({
     availableDate: Date,
     untilDate: Date,
     published: {type:Boolean, default: false},
+    questions: Number,
   },
   { collection: "quizzes" });
 export default quizSchema;
