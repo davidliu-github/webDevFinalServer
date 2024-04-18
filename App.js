@@ -5,6 +5,7 @@ import cors from "cors";
 import CourseRoutes from "./Kanbas/courses/routes.js";
 import ModuleRoutes from "./Kanbas/Modules/routes.js";
 import mongoose from "mongoose";
+import QuizRoutes from './Kanbas/Quiz/routes.js';
 
 mongoose.connect("mongodb://127.0.0.1:27017/kanbas");
 const app = express()
@@ -13,6 +14,7 @@ app.use(express.json());
 
 ModuleRoutes(app);
 CourseRoutes(app);
+QuizRoutes(app);
 Lab5(app);
 Hello(app)
 app.listen(process.env.PORT || 4000)

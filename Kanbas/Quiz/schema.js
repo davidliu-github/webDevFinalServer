@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 const quizSchema = new mongoose.Schema({
+    title: {type: String, required: true},
     quizType: {
       type: String,
       enum: ["GRADED_QUIZ", "PRACTICE_QUIZ", "GRADED_SURVEY", "UNGRADED_SURVEY"],
@@ -9,17 +10,18 @@ const quizSchema = new mongoose.Schema({
         type: String,
         enum: ["Quizzes", "Exams", "Assignments", "Project"],
         default: "Quizzes",},
-    shuffleAnswers: {type:String, default: "Yes"},
+    shuffleAnswers: {type:Boolean, default: true},
     timeLimit: {type:Number, default: 20},
-    multipleAttempts: {type:String, default: "No"},
+    multipleAttempts: {type:Boolean, default: false},
     showCorrectAnswers: {type:Boolean, default: false},
     accessCode: {type:String, required: true, default: ""},
-    oneQuestionAtATime: {type:String, default: "Yes"},
-    webcamRequired: {type:String, default: "No"},
-    lockQuestion: {type:String, default: "No"},
+    oneQuestionAtATime: {type:Boolean, default: true},
+    webcamRequired: {type:Boolean, default: false},
+    lockQuestion: {type:Boolean, default: false},
     dueDate: Date,
     availableDate: Date,
     untilDate: Date,
+    published: {type:Boolean, default: false},
   },
-  { collection: "quiz" });
+  { collection: "quizzes" });
 export default quizSchema;
