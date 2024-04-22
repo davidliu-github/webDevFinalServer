@@ -9,3 +9,7 @@ export const findQuizById = (quizId) => model.findById(quizId);
 export const findAllQuizzes = () => model.find();
 export const deleteQuiz = (quizId) => model.deleteOne({ _id: quizId });
 export const findQuizByTitle = (title) => model.findOne({ title: title });
+export const findQuizQuestionById = (questionId) =>
+  model.find({
+    "questions._id": questionId,
+  });
