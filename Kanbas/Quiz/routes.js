@@ -36,4 +36,17 @@ export default function QuizRoutes(app) {
     res.json(quiz);
   };
   app.get("/api/quizzes/questions/:questionId", getQuizQuestionById);
+
+  // Given a new question, adds that question for the specified quiz
+  const createQuestion = async (req, res) => {
+    try {
+      const { quizId } = req.params;
+      const question = req.body;
+      const status = await dao.createQuestion(quizId, question);
+      res.json(status);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+  app.post("/api/quizzes/:quizId/questions", createQuestion);
 }

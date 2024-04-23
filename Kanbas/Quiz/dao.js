@@ -4,7 +4,7 @@ export const createQuiz = (quiz) => {
   return model.create(quiz);
 };
 export const updateQuiz = (quizId, quiz) =>
-  model.updateOne({ _id: quizId }, { $set: quiz });
+  model.findOneAndUpdate({ _id: quizId }, quiz);
 export const findQuizById = (quizId) => model.findById(quizId);
 export const findAllQuizzes = () => model.find();
 export const deleteQuiz = (quizId) => model.deleteOne({ _id: quizId });
@@ -13,3 +13,5 @@ export const findQuizQuestionById = (questionId) =>
   model.find({
     "questions._id": questionId,
   });
+export const createQuestion = (quizId, question) =>
+  model.updateOne({ _id: quizId }, { $push: { questions: question } });
