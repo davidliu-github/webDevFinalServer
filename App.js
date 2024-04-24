@@ -7,7 +7,7 @@ import ModuleRoutes from "./Kanbas/Modules/routes.js";
 import mongoose from "mongoose";
 import QuizRoutes from "./Kanbas/Quiz/routes.js";
 
-mongoose.connect("mongodb:///127.0.0.1:27017/kanbas");
+mongoose.connect("mongodb://127.0.0.1:27017/kanbas");
 const app = express();
 app.use(cors());
 app.use(express.json());

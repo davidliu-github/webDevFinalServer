@@ -13,5 +13,12 @@ export const findQuizQuestionById = (questionId) =>
   model.find({
     "questions._id": questionId,
   });
-export const createQuestion = (quizId, question) =>
-  model.updateOne({ _id: quizId }, { $push: { questions: question } });
+export const createQuestion = async (quizId, question) => {
+  const updatedQuiz = await model.findOneAndUpdate(
+    { _id: quizId },
+    { $push: { questions: question } },
+    { new: true }
+  );
+  const newQuestion = updatedQuiz.questions[updatedQuiz.questions.length - 1];
+  return newQuestion;
+};
