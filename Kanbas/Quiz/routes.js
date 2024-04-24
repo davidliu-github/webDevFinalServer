@@ -40,13 +40,37 @@ export default function QuizRoutes(app) {
   // Given a new question, adds that question for the specified quiz and returns the new question id
   const createQuestion = async (req, res) => {
     try {
-      const {quizId} = req.params;
+      const { quizId } = req.params;
       const question = req.body;
       const newQuestion = await dao.createQuestion(quizId, question);
-      res.json({questionId: newQuestion._id});
+      res.json({ questionId: newQuestion._id });
     } catch (error) {
-      res.status(500).json({error: error.message});
+      res.status(500).json({ error: error.message });
     }
   };
   app.post("/api/quizzes/:quizId/questions", createQuestion);
+
+  // Given a quiz id, updates the quiz with the new questions data
+  const updateQuestion = async (req, res) => {
+    try {
+      const { quizId } = req.params;
+      const questions = req.body;
+      const quiz = await dao.updateQuestion(quizId, questions);
+      res.json(quiz);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+  app.put("/api/quizzes/:quizId/questions", updateQuestion);
+
+  const deleteQuizQuestion = async (req, res) => {
+    try {
+      const { quizId, questionId } = req.params;
+      const quiz = await dao.deleteQuizQuestion(quizId, questionId);
+      res.json(quiz);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  };
+  app.delete("/api/quizzes/:quizId/questions/:questionId", deleteQuizQuestion);
 }
