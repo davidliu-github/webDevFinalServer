@@ -44,6 +44,7 @@ const quizSchema = new mongoose.Schema(
       ],
       default: [],
     },
+    quizInstructions: String
   },
   { collection: "quizzes" }
 );
