@@ -35,6 +35,7 @@ const quizSchema = new mongoose.Schema(
       type: [
         new mongoose.Schema({
           type: String,
+          editing: Boolean,
           title: String,
           points: Number,
           question: String,
