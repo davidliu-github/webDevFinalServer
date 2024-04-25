@@ -10,7 +10,7 @@ export const findAllQuizzes = () => model.find();
 export const deleteQuiz = (quizId) => model.deleteOne({ _id: quizId });
 export const findQuizByTitle = (title) => model.findOne({ title: title });
 export const findQuizQuestionById = (questionId) =>
-  model.find({
+  model.findOne({
     "questions._id": questionId,
   });
 export const createQuestion = async (quizId, question) => {
@@ -21,4 +21,20 @@ export const createQuestion = async (quizId, question) => {
   );
   const newQuestion = updatedQuiz.questions[updatedQuiz.questions.length - 1];
   return newQuestion;
+};
+export const updateQuestion = async (quizId, questions) => {
+  const updatedQuiz = await model.findOneAndUpdate(
+    { _id: quizId },
+    { questions: questions },
+    { new: true }
+  );
+  return updatedQuiz;
+};
+export const deleteQuizQuestion = async (quizId, questionId) => {
+  const updatedQuiz = await model.findOneAndUpdate(
+    { _id: quizId },
+    { $pull: { questions: { _id: questionId } } },
+    { new: true }
+  );
+  return updatedQuiz;
 };
