@@ -10,7 +10,7 @@ export default function QuizRoutes(app) {
     const { quizId } = req.params;
     const status = await dao.updateQuiz(quizId, req.body);
     res.json(status);
-   };
+  };
   app.put("/api/quizzes/:quizId", updateQuiz);
 
   const findAllQuizzes = async (req, res) => {
@@ -30,4 +30,10 @@ export default function QuizRoutes(app) {
     res.json(quiz);
   };
   app.get("/api/quizzes/title/:title", getQuizByTitle);
+
+  const findQuizById = async (req, res) => {
+    const quiz = await dao.findQuizById(req.params.id);
+    res.json(quiz);
+  };
+  app.get("/api/quizzes/:id", findQuizById);
 }
